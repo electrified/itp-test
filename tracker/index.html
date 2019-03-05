@@ -1,0 +1,56 @@
+<html>
+    <body>
+        <h1>Hello I am a tracker</h1>
+        <p>I'm going to try an set a cookie on my domain itp-example-tracker.site</p>
+        <form action="/">
+            <input type="text" name="test">
+            <input type="submit" value="Submit">
+        </form>
+        <script>
+            if (document.cookie.indexOf('itpTestTracker') < 0) {
+                document.cookie = "itpTestTracker=" + Math.random() * 100 + ";domain=itp-example-tracker.site"; 
+                console.log('setting cookie')
+            } else {
+                console.log('not setting cookie')
+            }
+            
+        </script>
+        <script>
+            function reqListener () {
+                console.log(this.responseText);
+            }
+
+            var oReq = new XMLHttpRequest();
+            oReq.addEventListener("load", reqListener);
+            oReq.open("GET", "https://itp-example-tracker.site/steal");
+            oReq.send();
+
+            var oReq2 = new XMLHttpRequest();
+            oReq2.addEventListener("load", reqListener);
+            oReq2.open("POST", "https://itp-example-tracker.site/steal");
+            oReq2.send();
+        </script>
+
+
+<script>
+        function makeRequestWithUserGesture() {
+          var promise = document.requestStorageAccess();
+          promise.then(
+            function () {
+              alert('GRANTED');
+              if (document.cookie.indexOf('itpAfterStorageAcccess') < 0) {
+                    document.cookie = "itpAfterStorageAcccess=" + Math.random() * 100 + ";domain=itp-example-tracker.site"; 
+                    console.log('setting cookie')
+                } else {
+                    console.log('not setting cookie')
+                }
+            },
+            function () {
+                alert('DENIED')
+            }
+          );
+        }
+        </script>
+        <button onclick="makeRequestWithUserGesture()">Prompt ITP</button>
+    </body>
+</html>
