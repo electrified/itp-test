@@ -8,7 +8,7 @@
         </form>
         <script>
             if (document.cookie.indexOf('itpTestTracker') < 0) {
-                document.cookie = "itpTestTracker=" + Math.random() * 100 + ";domain=itp-example-tracker.site"; 
+                document.cookie = "itpTestTracker=" + Math.random() * 100 + ";domain=itp-test-tracker.netlify.com"; 
                 console.log('setting cookie')
             } else {
                 console.log('not setting cookie')
@@ -22,12 +22,12 @@
 
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://itp-example-tracker.site/steal");
+            oReq.open("GET", "https://itp-test-tracker.netlify.com/steal");
             oReq.send();
 
             var oReq2 = new XMLHttpRequest();
             oReq2.addEventListener("load", reqListener);
-            oReq2.open("POST", "https://itp-example-tracker.site/steal");
+            oReq2.open("POST", "https://itp-test-tracker.netlify.com/steal");
             oReq2.send();
         </script>
 
